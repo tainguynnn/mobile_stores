@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/cart_cubit.dart';
+import '../../models/product.dart';
 
 class OrderButton extends StatelessWidget {
-  const OrderButton({super.key});
+  const OrderButton({super.key,required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => context.read<CartCubit>().addToCart(product),
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(240, 173, 78, 1),
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),

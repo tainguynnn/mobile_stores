@@ -131,11 +131,11 @@ class ProductDetail extends StatelessWidget {
                               children: [
                                 Icon(Icons.arrow_circle_left),
                                 SizedBox(width: 4),
-                                Text('Order Now'),
+                                Text('Back'),
                               ],
                             ),
                           ),
-                          const OrderButton()
+                          OrderButton(product: product,)
                         ],
                       )
                     ],

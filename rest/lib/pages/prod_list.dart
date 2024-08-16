@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:rest/pages/product_detail.dart';
 import 'package:rest/widgets/screen_title/page_title.dart';
 
 import '../models/product.dart';
@@ -13,7 +12,7 @@ class ProdList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _HomePage();
+    return const _HomePage();
   }
 }
 
@@ -38,7 +37,10 @@ class _HomePageState extends State<_HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          PageTitle(title: 'Products',subTitle: 'All available products in our store',),
+          PageTitle(
+            title: 'Products',
+            subTitle: 'All available products in our store',
+          ),
           FutureBuilder<List<Product>>(
             future: futureProducts,
             builder: (context, snapshot) {
@@ -92,18 +94,9 @@ class _HomePageState extends State<_HomePage> {
     final response = await http.get(baseUrl);
 
     if (response.statusCode == 200) {
-      print(response.body);
-
       return _parseProducts(response.body);
     }
 
     throw Exception('Failed to load Product');
-  }
-
-  Future<void> _refreshProducts() async {
-    final result = fetchProducts();
-    setState(() {
-      futureProducts = result;
-    });
   }
 }

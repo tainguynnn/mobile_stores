@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rest/widgets/buttons/order_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rest/pages/home_screen.dart';
 import 'package:rest/widgets/cart/cart_table.dart';
 import 'package:rest/widgets/screen_title/page_title.dart';
+
+import '../cubit/cart_cubit.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
@@ -18,7 +21,7 @@ class Cart extends StatelessWidget {
           height: 20,
         ),
         const CartTable(),
-        SizedBox(
+        const SizedBox(
           height: 36,
         ),
         SizedBox(
@@ -36,7 +39,7 @@ class Cart extends StatelessWidget {
                   horizontal: 32,
                   vertical: 10), // Remove padding to make it a perfect square
             ),
-            onPressed: () {},
+            onPressed: () => context.read<CartCubit>().clearCart(),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               // Center content inside the button
@@ -48,7 +51,7 @@ class Cart extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 36,
         ),
         SizedBox(
@@ -78,7 +81,7 @@ class Cart extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 36,
         ),
         SizedBox(
@@ -96,7 +99,9 @@ class Cart extends StatelessWidget {
                   horizontal: 32,
                   vertical: 10), // Remove padding to make it a perfect square
             ),
-            onPressed: () {},
+            onPressed: () {
+              Back(context);
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               // Center content inside the button
@@ -110,5 +115,11 @@ class Cart extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void Back(BuildContext context) {
+    final route = MaterialPageRoute(builder: (context) => const HomeScreen());
+
+    Navigator.push(context, route);
   }
 }

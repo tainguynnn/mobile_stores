@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rest/pages/product_detail.dart';
 
 import '../models/product.dart';
+import '../pages/product_detail.dart';
 import 'buttons/order_button.dart';
 
 class ListItem extends StatelessWidget {
-  ListItem({
-    super.key,
-
-    required this.product
-  });
-
-
   final Product product;
+
+  ListItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -43,28 +38,20 @@ class ListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed:() => _detailProduct(context,product),
+                  onPressed: () => _detailProduct(context, product),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(66, 139, 202, 1),
                     foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-                    // Set the background color
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(8), // Set the border radius
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    // Set the button to be square (60x60)
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical:
-                            10), // Remove padding to make it a perfect square
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
                   ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    // Center content inside the button
                     children: [
                       Icon(Icons.info_rounded),
                       SizedBox(width: 4),
-                      // Add some spacing between icon and text
                       Text('Details'),
                     ],
                   ),
@@ -72,7 +59,7 @@ class ListItem extends StatelessWidget {
                 SizedBox(
                   width: 4,
                 ),
-                OrderButton()
+                OrderButton(product: product,),
               ],
             )
           ],
@@ -80,12 +67,11 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
+
   void _detailProduct(BuildContext context, Product product) {
     final route = MaterialPageRoute(
         builder: (context) => const ProductDetail(),
         settings: RouteSettings(arguments: product));
     Navigator.push(context, route);
   }
-
-
 }
