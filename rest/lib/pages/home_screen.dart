@@ -15,11 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   // List of screens to navigate to
-  static  final List<Widget> _pages = <Widget>[
+  static final List<Widget> _pages = <Widget>[
     const ProdList(),
     const Cart(),
     const Account(),
-
   ];
 
   void _onItemTapped(int index) {
@@ -41,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.home,color: Colors.black,),
+                Icon(
+                  Icons.home,
+                  color: Colors.black,
+                ),
                 Text('Home'),
               ],
             ),
@@ -51,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.shopping_cart,color: Colors.black,),
+                Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                ),
                 Text('Cart'),
               ],
             ),
@@ -61,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.account_circle,color: Colors.black,),
+                Icon(
+                  Icons.account_circle,
+                  color: Colors.black,
+                ),
                 Text('Account'),
               ],
             ),
