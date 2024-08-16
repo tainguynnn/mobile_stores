@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rest/pages/product_detail.dart';
-import 'package:rest/pages/product_list.dart';
+import 'package:rest/pages/account.dart';
+import 'package:rest/pages/prod_list.dart';
 
-import '../widgets/bottom_nav.dart';
 import 'cart.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,10 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   // List of screens to navigate to
-  static  List<Widget> _pages = <Widget>[
-    ProductList(),
-    Cart(),
-    ProductDetail(),
+  static  final List<Widget> _pages = <Widget>[
+    const ProdList(),
+    const Cart(),
+    const Account(),
 
   ];
 

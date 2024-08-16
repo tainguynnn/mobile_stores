@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest/widgets/buttons/order_button.dart';
-import 'package:rest/widgets/cart_table.dart';
-import 'package:rest/widgets/page_title.dart';
+import 'package:rest/widgets/cart/cart_table.dart';
+import 'package:rest/widgets/screen_title/page_title.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});

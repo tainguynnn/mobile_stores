@@ -22,7 +22,7 @@ class _CartTableState extends State<CartTable> {
           border: TableBorder.all(color: Colors.transparent),
           columnWidths: const <int, TableColumnWidth>{
             0: FlexColumnWidth(),
-            1: FixedColumnWidth(60),
+            1: FixedColumnWidth(60), // thay đổi theo tỉ lệ màn hình
             2: FixedColumnWidth(90),
             3: FixedColumnWidth(60),
           },

@@ -26,8 +26,8 @@ class PageTitle extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 13, vertical: 18),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 18),
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 238, 238, 238),
       ),
       child: Center(

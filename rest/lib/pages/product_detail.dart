@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:rest/widgets/detail_attribute.dart';
+import 'package:rest/widgets/product_detauk/detail_attribute.dart';
+import '../models/product.dart';
 import '../widgets/buttons/order_button.dart';
-import '../widgets/page_title.dart';
+import '../widgets/screen_title/page_title.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final product = ModalRoute.of(context)?.settings.arguments as Product;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -18,23 +23,23 @@ class ProductDetail extends StatelessWidget {
             ),
             Column(
               children: [
-                Container(
+                SizedBox(
                   width: 228,
                   height: 243,
-                  child: Image.asset('assets/images/iphone14.png'),
+                  child: Image.network(product.imageUrl),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Iphone X',
-                        style: TextStyle(
+                      Text(
+                        product.name,
+                        style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
                         ),
@@ -42,8 +47,8 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                      const Text(
-                        '''A smartphone is a handheld personal computer with a mobile operating system and an integrated mobile broadband cellular network connection for voice, SMS, and Internet data communication; most, if not all, smartphones also support Wi-Fi.''',
+                      Text(
+                        product.description,
                       ),
                       const SizedBox(
                         height: 16,
@@ -64,9 +69,9 @@ class ProductDetail extends StatelessWidget {
                                 color: Color.fromRGBO(240, 173, 78, 1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
-                            child: const Text(
-                              '891721231233912',
-                              style: TextStyle(
+                            child: Text(
+                              '${product.id}',
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: Color.fromARGB(255, 255, 255, 255),
                               ),
@@ -79,28 +84,28 @@ class ProductDetail extends StatelessWidget {
                       ),
                       DetailAttribute(
                         title: 'Manufacturer',
-                        detail: 'Apple',
+                        detail: product.manufacturer,
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       DetailAttribute(
                         title: 'Category',
-                        detail: 'Apple',
+                        detail: product.category,
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       DetailAttribute(
                         title: 'Available units in stock',
-                        detail: '800',
+                        detail: '${product.quantity}',
                       ),
                       const SizedBox(
                         height: 16,
                       ),
                       DetailAttribute(
                         title: 'Price',
-                        detail: '1099 USD',
+                        detail: '${product.price} USD',
                       ),
                       const SizedBox(
                         height: 16,
@@ -110,15 +115,15 @@ class ProductDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => {Navigator.pop(context)},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(56, 193, 114, 1),
+                              backgroundColor: const Color.fromRGBO(56, 193, 114, 1),
                               foregroundColor:
-                                  Color.fromARGB(255, 255, 255, 255),
+                                  const Color.fromARGB(255, 255, 255, 255),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 32, vertical: 10),
                             ),
                             child: const Row(
