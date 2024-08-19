@@ -69,7 +69,7 @@ class Cart extends StatelessWidget {
                   horizontal: 32,
                   vertical: 10), // Remove padding to make it a perfect square
             ),
-            onPressed: () {},
+            onPressed: ()   {},
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               // Center content inside the button
