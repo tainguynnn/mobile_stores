@@ -25,12 +25,12 @@ class ListItem extends StatelessWidget {
             Text(
               product.name,
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
             ),
-            Text('\$${product.price} USD', style: TextStyle(fontWeight: FontWeight.w400)),
+            Text('\$${product.price} USD', style: const TextStyle(fontWeight: FontWeight.w400)),
             Text('${product.quantity} Units in stock',
-                style: TextStyle(fontWeight: FontWeight.w400)),
-            SizedBox(
+                style: const TextStyle(fontWeight: FontWeight.w400)),
+            const SizedBox(
               height: 9,
             ),
             Row(
@@ -56,7 +56,7 @@ class ListItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 OrderButton(product: product,),
