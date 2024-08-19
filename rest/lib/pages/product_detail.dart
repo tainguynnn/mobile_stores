@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rest/widgets/product_detauk/detail_attribute.dart';
 import '../models/product.dart';
 import '../widgets/buttons/order_button.dart';
+import '../widgets/product_detail/detail_attribute.dart';
 import '../widgets/screen_title/page_title.dart';
 
 class ProductDetail extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:rest/pages/home_screen.dart';
 import 'package:rest/widgets/cart/cart_table.dart';
 import 'package:rest/widgets/screen_title/page_title.dart';
 
-import '../cubit/cart_cubit.dart';
+import '../../cubit/cart_cubit.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
@@ -60,22 +60,22 @@ class Cart extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromRGBO(56, 193, 114, 1),
               foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-              // Set the background color
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Set the border radius
+                borderRadius: BorderRadius.circular(8),
               ),
-              // Set the button to be square (60x60)
               padding: const EdgeInsets.symmetric(
                   horizontal: 32,
-                  vertical: 10), // Remove padding to make it a perfect square
+                  vertical: 10),
             ),
-            onPressed: ()   {},
+            onPressed: () async {
+              await context.read<CartCubit>().createOrder();
+
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              // Center content inside the button
               children: [
                 Icon(Icons.shopping_cart),
-                SizedBox(width: 4), // Add some spacing between icon and text
+                SizedBox(width: 4),
                 Text('Check out'),
               ],
             ),

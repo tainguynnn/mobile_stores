@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rest/pages/auth_page.dart';
-import 'package:rest/pages/home_screen.dart';
-import 'package:rest/pages/login_page.dart';
+import 'package:rest/pages/auth/auth_page.dart';
+
 import 'cubit/cart_cubit.dart';
 
 void main() {
