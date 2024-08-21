@@ -24,7 +24,6 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     String imageUrl = json['image'].replaceFirst('localhost', '10.0.2.2');
 
-
     return Product(
       id: json['id'],
       name: json['name'],

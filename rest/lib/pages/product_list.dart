@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rest/widgets/screen_title/page_title.dart';
 
+import '../constant/constant.dart';
 import '../models/product.dart';
 import '../widgets/list_item.dart';
 
@@ -37,7 +38,7 @@ class _HomePageState extends State<_HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          PageTitle(
+          const PageTitle(
             title: 'Products',
             subTitle: 'All available products in our store',
           ),
@@ -90,8 +91,8 @@ class _HomePageState extends State<_HomePage> {
 
   Future<List<Product>> fetchProducts() async {
     // Define the base URL
-    final baseUrl = Uri.parse('http://10.0.2.2:8080/api/v2/products');
-    final response = await http.get(baseUrl);
+    final Url = Uri.parse('$baseUrl/products');
+    final response = await http.get(Url);
 
     if (response.statusCode == 200) {
       return _parseProducts(response.body);

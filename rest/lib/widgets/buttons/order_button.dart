@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rest/widgets/dialog_helper.dart';
 
 import '../../cubit/cart_cubit.dart';
 import '../../models/product.dart';
 
 class OrderButton extends StatelessWidget {
-  const OrderButton({super.key,required this.product});
+  const OrderButton({super.key, required this.product});
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => context.read<CartCubit>().addToCart(product),
+      onPressed: () {
+        if (product.quantity < 1) {
+          DialogHelper.showErrorDialog(context, 'no units in stock');
+          return;
+        } else {
+          context.read<CartCubit>().addToCart(product);
+        }
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(240, 173, 78, 1),
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),

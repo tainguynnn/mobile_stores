@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class PageTitle extends StatelessWidget {
-  PageTitle({super.key, required this.title, this.subTitle = ''});
+  const PageTitle({super.key, required this.title, this.subTitle = ''});
 
-  String title;
-  String subTitle;
+  final String title;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> columnChildren = [
       Text(
         title,
-        style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
+        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
       ),
     ];
 
@@ -19,7 +19,7 @@ class PageTitle extends StatelessWidget {
       columnChildren.add(
         Text(
           subTitle,
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
       );
     }
@@ -37,5 +37,4 @@ class PageTitle extends StatelessWidget {
       ),
     );
   }
-
 }

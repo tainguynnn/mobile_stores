@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rest/pages/account.dart';
-import 'package:rest/pages/prod_list.dart';
+import 'package:rest/pages/product_list.dart';
 
 import 'cart.dart';
 

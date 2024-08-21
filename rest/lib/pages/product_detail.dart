@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rest/widgets/product_detauk/detail_attribute.dart';
 import '../models/product.dart';
 import '../widgets/buttons/order_button.dart';
+import '../widgets/product_detail/detail_attribute.dart';
 import '../widgets/screen_title/page_title.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProductDetail extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            PageTitle(
+            const PageTitle(
               title: 'Products',
             ),
             Column(
@@ -117,7 +117,8 @@ class ProductDetail extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () => {Navigator.pop(context)},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromRGBO(56, 193, 114, 1),
+                              backgroundColor:
+                                  const Color.fromRGBO(56, 193, 114, 1),
                               foregroundColor:
                                   const Color.fromARGB(255, 255, 255, 255),
                               shape: RoundedRectangleBorder(
@@ -135,7 +136,9 @@ class ProductDetail extends StatelessWidget {
                               ],
                             ),
                           ),
-                          OrderButton(product: product,)
+                          OrderButton(
+                            product: product,
+                          )
                         ],
                       )
                     ],
