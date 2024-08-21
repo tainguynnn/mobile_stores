@@ -13,12 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return BlocProvider(
-    //   create: (context) => CartCubit(),
-    //   child: const MaterialApp(
-    //     home: HomeScreen(),
-    //   ),
-    // );
+
 
     return BlocProvider(
       create: (context) => CartCubit(),

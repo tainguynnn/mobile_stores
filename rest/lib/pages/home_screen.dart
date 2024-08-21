@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rest/pages/account.dart';
 import 'package:rest/pages/product_list.dart';
 
-import 'auth/cart.dart';
+import 'cart.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

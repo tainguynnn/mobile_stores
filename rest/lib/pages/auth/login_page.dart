@@ -121,9 +121,9 @@ class LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 25),
                 ),
                 const SizedBox(height: 50),
-                TextFields(controller: _usernameController, hint: 'Username'),
+                TextFields(controller: _usernameController, hint: 'Username',obsecure: false,),
                 const SizedBox(height: 10),
-                TextFields(controller: _passwordController, hint: 'Password'),
+                TextFields(controller: _passwordController, hint: 'Password',obsecure: true,),
                 const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),

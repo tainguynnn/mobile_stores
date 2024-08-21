@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../widgets/text_fields/text_fields.dart';
+import '../../widgets/text_fields/text_fields.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -17,6 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   // Text controllers
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _passwordConfirmController = TextEditingController();
   final _usernameController = TextEditingController();
   bool _isLoading = false;
 
@@ -36,39 +37,53 @@ class _RegisterPageState extends State<RegisterPage> {
     final name = _nameController.text;
     final username = _usernameController.text;
     final password = _passwordController.text;
+    final passwordConfirm = _passwordConfirmController.text;
 
-    try {
-      final response = await http.post(
-        Uri.parse('http://10.0.2.2:8080/api/v2/users/register'), // Replace with your API URL
-        headers: {'Content-Type': 'application/json;charset=UTF-8',},
-        body: json.encode({
-          'name': name,
-          'username': username,
-          'password': password,
-        }),
-      );
+    if (passwordConfirm == password) {
+      try {
+        final response = await http.post(
+          Uri.parse('http://10.0.2.2:8080/api/v2/users/register'),
+          // Replace with your API URL
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
+          body: json.encode({
+            'name': name,
+            'username': username,
+            'password': password,
+          }),
+        );
 
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
 
-        if (response.statusCode == 200) {
-          // Registration successful, navigate to login page
-          widget.showLoginPage();
-        } else {
-          print('Failed response: ${response.statusCode} - ${response.body}');
-          _showErrorDialog('Registration failed. Please try again.');
+          if (response.statusCode == 200) {
+            // Registration successful, navigate to login page
+            widget.showLoginPage();
+          }
+          else if (response.statusCode == 400) {
+            // Registration successful, navigate to login page
+            _showErrorDialog(response.body);
+          }
+          else {
+            _showErrorDialog('Registration failed. Please try again.');
+          }
+        }
+      } catch (e) {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+          _showErrorDialog('An error occurred. Please try again.');
         }
       }
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        _showErrorDialog('An error occurred. Please try again.');
-        print('Error: $e');
-      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      _showErrorDialog('password and confirm password are not match');
     }
   }
 
@@ -108,12 +123,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(fontSize: 25),
                 ),
                 const SizedBox(height: 50),
-                TextFields(controller: _nameController, hint: 'Name'),
+                TextFields(
+                  controller: _nameController,
+                  hint: 'Name',
+                  obsecure: false,
+                ),
                 const SizedBox(height: 10),
-                TextFields(controller: _usernameController, hint: 'Username'),
+                TextFields(
+                  controller: _usernameController,
+                  hint: 'Username',
+                  obsecure: false,
+                ),
                 const SizedBox(height: 10),
-                TextFields(controller: _passwordController, hint: 'Password'),
+                TextFields(
+                  controller: _passwordController,
+                  hint: 'Password',
+                  obsecure: true,
+                ),
                 const SizedBox(height: 10),
+                TextFields(
+                  controller: _passwordConfirmController,
+                  hint: 'Confirm password',
+                  obsecure: true,
+                ),
                 const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -127,15 +159,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: Center(
                         child: _isLoading
-                            ? const CircularProgressIndicator(color: Colors.white)
+                            ? const CircularProgressIndicator(
+                                color: Colors.white)
                             : const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
                       ),
                     ),
                   ),

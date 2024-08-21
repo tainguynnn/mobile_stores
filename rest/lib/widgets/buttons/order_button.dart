@@ -12,7 +12,27 @@ class OrderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => context.read<CartCubit>().addToCart(product),
+      onPressed: () {
+        if(product.quantity <1 ) {
+          showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Error'),
+              content: Text('no units in stock'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: const Text('Okay'),
+                ),
+              ],
+            ),
+          );
+        }else{
+          context.read<CartCubit>().addToCart(product);
+        }
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(240, 173, 78, 1),
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),

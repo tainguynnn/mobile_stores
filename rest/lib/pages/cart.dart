@@ -4,7 +4,7 @@ import 'package:rest/pages/home_screen.dart';
 import 'package:rest/widgets/cart/cart_table.dart';
 import 'package:rest/widgets/screen_title/page_title.dart';
 
-import '../../cubit/cart_cubit.dart';
+import '../cubit/cart_cubit.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
