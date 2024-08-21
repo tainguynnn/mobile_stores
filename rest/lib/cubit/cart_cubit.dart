@@ -5,6 +5,7 @@ import 'package:rest/widgets/dialog_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import '../constant/constant.dart';
 import '../models/product.dart';
 
 class CartCubit extends Cubit<List<Map<String, dynamic>>> {
@@ -61,7 +62,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
     final cartItems = state;
     if (cartItems.isEmpty) {
       DialogHelper.showErrorDialog(context, 'no product in cart');
-
+      return;
     } else {
       final total = cartItems.fold<int>(
           0,
@@ -87,7 +88,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
       final token = prefs.getString('authToken');
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:8080/api/v2/orders'),
+        Uri.parse('$baseUrl/orders'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token', // Replace with actual token
@@ -98,7 +99,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
       if (response.statusCode == 201) {
         clearCart();
       } else {
-        DialogHelper.showErrorDialog(context,'not enough unit in stock');
+        DialogHelper.showErrorDialog(context, 'not enough unit in stock');
       }
     }
   }

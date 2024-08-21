@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:rest/widgets/dialog_helper.dart';
 import 'dart:convert';
 
+import '../../constant/constant.dart';
 import '../../widgets/text_fields/password_fields.dart';
 import '../../widgets/text_fields/text_fields.dart';
 
@@ -44,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (passwordConfirm == password) {
       try {
         final response = await http.post(
-          Uri.parse('http://10.0.2.2:8080/api/v2/users/register'),
+          Uri.parse('$baseUrl/users/register'),
           // Replace with your API URL
           headers: {
             'Content-Type': 'application/json;charset=UTF-8',

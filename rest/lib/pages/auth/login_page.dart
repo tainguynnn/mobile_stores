@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:rest/widgets/text_fields/password_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:rest/pages/home_screen.dart';
 import 'package:rest/widgets/text_fields/text_fields.dart';
 
+import '../../constant/constant.dart';
 import '../../widgets/dialog_helper.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,7 +49,7 @@ class LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:8080/api/v2/users/login'),
+        Uri.parse('$baseUrl/users/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'username': username,

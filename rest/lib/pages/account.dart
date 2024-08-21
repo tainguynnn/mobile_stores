@@ -7,6 +7,7 @@ import 'package:rest/widgets/screen_title/page_title.dart';
 import 'package:rest/models/user.dart';
 
 
+import '../constant/constant.dart';
 import '../widgets/product_detail/account_attribute.dart';
 
 class Account extends StatefulWidget {
@@ -22,7 +23,7 @@ class _AccountState extends State<Account> {
     final token = prefs.getString('authToken');
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8080/api/v2/users/auth/me'),
+      Uri.parse('$baseUrl/v2/users/auth/me'),
       headers: {'Authorization': 'Bearer $token'},
     );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rest/widgets/dialog_helper.dart';
 
 import '../../cubit/cart_cubit.dart';
 import '../../models/product.dart';
@@ -14,21 +15,8 @@ class OrderButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (product.quantity < 1) {
-          showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: const Text('Error'),
-              content: const Text('no units in stock'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                  child: const Text('Okay'),
-                ),
-              ],
-            ),
-          );
+          DialogHelper.showErrorDialog(context, 'no units in stock');
+          return;
         } else {
           context.read<CartCubit>().addToCart(product);
         }
