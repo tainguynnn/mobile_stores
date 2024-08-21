@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +21,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
           (int.parse(cartItems[index]['Qty']) * product.price).toString();
     } else {
       cartItems.add({
-        'unit':product.quantity,
+        'unit': product.quantity,
         'id': product.id,
         'name': product.name,
         'Qty': '1',
@@ -55,44 +56,76 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
     emit([]);
   }
 
-  Future<void> createOrder() async {
+  Future<void> createOrder(BuildContext context) async {
     final cartItems = state;
+    if (cartItems.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('no product in cart'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      final total = cartItems.fold<int>(
+          0,
+          (previousValue, item) =>
+              previousValue + int.parse(item['Price'] ?? '0'));
 
+      final orderDetails = cartItems
+          .map((item) => {
+                'productId': item['id'],
+                'quantity': int.parse(item['Qty']),
+                'unitPrice': int.parse(item['Unit Price'])
+              })
+          .toList();
 
-    final total = cartItems.fold<int>(
-        0,
-        (previousValue, item) =>
-            previousValue + int.parse(item['Price'] ?? '0'));
+      final orderBody = jsonEncode({
+        'total': total,
+        'paymentMethod': 2,
+        'orderStatus': 1,
+        'details': orderDetails,
+      });
 
-    final orderDetails = cartItems
-        .map((item) => {
-              'productId': item['id'],
-              'quantity': int.parse(item['Qty']),
-              'unitPrice': int.parse(item['Unit Price'])
-            })
-        .toList();
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('authToken');
 
-    final orderBody = jsonEncode({
-      'total': total,
-      'paymentMethod': 2,
-      'orderStatus': 1,
-      'details': orderDetails,
-    });
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:8080/api/v2/orders'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token', // Replace with actual token
+        },
+        body: orderBody,
+      );
 
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('authToken');
-
-    final response = await http.post(
-      Uri.parse('http://10.0.2.2:8080/api/v2/orders'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Replace with actual token
-      },
-      body: orderBody,
-    );
-
-    if (response.statusCode == 201) {
-      clearCart();
-    } else {}
+      if (response.statusCode == 201) {
+        clearCart();
+      } else {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('not enough units in stock'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text('Okay'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
   }
 }

@@ -66,7 +66,7 @@ class Cart extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
             ),
             onPressed: () async {
-              await context.read<CartCubit>().createOrder();
+              await context.read<CartCubit>().createOrder(context);
             },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
