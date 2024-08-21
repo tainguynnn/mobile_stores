@@ -37,7 +37,8 @@ class CartTable extends StatelessWidget {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Product',
-                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 14),
                         ),
                       ),
                     ),
@@ -72,7 +73,11 @@ class CartTable extends StatelessWidget {
                           child: Row(
                             children: [
                               GestureDetector(
-                                onTap: () {context.read<CartCubit>().deleteFromCart(item);},
+                                onTap: () {
+                                  context
+                                      .read<CartCubit>()
+                                      .deleteFromCart(item);
+                                },
                                 child: const Icon(
                                   Icons.close,
                                   color: Colors.red,

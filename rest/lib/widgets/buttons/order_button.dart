@@ -5,7 +5,7 @@ import '../../cubit/cart_cubit.dart';
 import '../../models/product.dart';
 
 class OrderButton extends StatelessWidget {
-  const OrderButton({super.key,required this.product});
+  const OrderButton({super.key, required this.product});
 
   final Product product;
 
@@ -13,12 +13,12 @@ class OrderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if(product.quantity <1 ) {
+        if (product.quantity < 1) {
           showDialog(
             context: context,
             builder: (ctx) => AlertDialog(
               title: const Text('Error'),
-              content: Text('no units in stock'),
+              content: const Text('no units in stock'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
@@ -29,7 +29,7 @@ class OrderButton extends StatelessWidget {
               ],
             ),
           );
-        }else{
+        } else {
           context.read<CartCubit>().addToCart(product);
         }
       },

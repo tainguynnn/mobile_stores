@@ -17,7 +17,7 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   Future<User?> _fetchUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('authToken') ;
+    final token = prefs.getString('authToken');
 
     final response = await http.get(
       Uri.parse('http://10.0.2.2:8080/api/v2/users/auth/me'),
@@ -39,17 +39,19 @@ class _AccountState extends State<Account> {
       future: _fetchUserData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
-          return Center(child: Text('No data available'));
+          return const Center(child: Text('No data available'));
         } else {
           final user = snapshot.data!;
           return Column(
             children: [
-              PageTitle(title: 'Account'),
-              const SizedBox(height: 20,),
+              const PageTitle(title: 'Account'),
+              const SizedBox(
+                height: 20,
+              ),
               DetailAttribute(title: 'Name', detail: user.name),
               DetailAttribute(title: 'Username', detail: user.username),
               DetailAttribute(title: 'Role', detail: user.role),
@@ -59,6 +61,4 @@ class _AccountState extends State<Account> {
       },
     );
   }
-
-
 }

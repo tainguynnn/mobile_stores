@@ -13,7 +13,7 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PageTitle(
+        const PageTitle(
           title: 'Cart',
           subTitle: 'All products selected are in your cart',
         ),
@@ -63,13 +63,10 @@ class Cart extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
             ),
             onPressed: () async {
               await context.read<CartCubit>().createOrder();
-
             },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,

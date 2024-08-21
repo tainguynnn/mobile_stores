@@ -27,7 +27,8 @@ class ListItem extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
             ),
-            Text('\$${product.price} USD', style: const TextStyle(fontWeight: FontWeight.w400)),
+            Text('\$${product.price} USD',
+                style: const TextStyle(fontWeight: FontWeight.w400)),
             Text('${product.quantity} Units in stock',
                 style: const TextStyle(fontWeight: FontWeight.w400)),
             const SizedBox(
@@ -45,7 +46,8 @@ class ListItem extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 10),
                   ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +61,9 @@ class ListItem extends StatelessWidget {
                 const SizedBox(
                   width: 4,
                 ),
-                OrderButton(product: product,),
+                OrderButton(
+                  product: product,
+                ),
               ],
             )
           ],

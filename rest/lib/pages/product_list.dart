@@ -37,7 +37,7 @@ class _HomePageState extends State<_HomePage> {
     return Scaffold(
       body: Column(
         children: [
-          PageTitle(
+          const PageTitle(
             title: 'Products',
             subTitle: 'All available products in our store',
           ),

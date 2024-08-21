@@ -62,12 +62,10 @@ class _RegisterPageState extends State<RegisterPage> {
           if (response.statusCode == 200) {
             // Registration successful, navigate to login page
             widget.showLoginPage();
-          }
-          else if (response.statusCode == 400) {
+          } else if (response.statusCode == 400) {
             // Registration successful, navigate to login page
             _showErrorDialog(response.body);
-          }
-          else {
+          } else {
             _showErrorDialog('Registration failed. Please try again.');
           }
         }
@@ -126,25 +124,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFields(
                   controller: _nameController,
                   hint: 'Name',
-                  obsecure: false,
+                  obscure: false,
                 ),
                 const SizedBox(height: 10),
                 TextFields(
                   controller: _usernameController,
                   hint: 'Username',
-                  obsecure: false,
+                  obscure: false,
                 ),
                 const SizedBox(height: 10),
                 TextFields(
                   controller: _passwordController,
                   hint: 'Password',
-                  obsecure: true,
+                  obscure: true,
                 ),
                 const SizedBox(height: 10),
                 TextFields(
                   controller: _passwordConfirmController,
                   hint: 'Confirm password',
-                  obsecure: true,
+                  obscure: true,
                 ),
                 const SizedBox(height: 12),
                 Padding(
