@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:rest/widgets/text_fields/password_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'dart:convert';
 
 import 'package:rest/pages/home_screen.dart';
 import 'package:rest/widgets/text_fields/text_fields.dart';
+
+import '../../widgets/dialog_helper.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -71,8 +74,10 @@ class LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         } else {
-          _showErrorDialog(
-              'Login failed. Please check your credentials and try again.');
+          DialogHelper.showErrorDialog(
+            context,
+            'Login failed. Please check your credentials and try again.',
+          );
         }
       }
     } catch (e) {
@@ -80,27 +85,12 @@ class LoginPageState extends State<LoginPage> {
         setState(() {
           _isLoading = false;
         });
-        _showErrorDialog('An error occurred. Please try again.');
+        DialogHelper.showErrorDialog(
+          context,
+          'An error occurred. Please try again.',
+        );
       }
     }
-  }
-
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: const Text('Okay'),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -124,13 +114,11 @@ class LoginPageState extends State<LoginPage> {
                 TextFields(
                   controller: _usernameController,
                   hint: 'Username',
-                  obscure: false,
                 ),
                 const SizedBox(height: 10),
-                TextFields(
+                PasswordFields(
                   controller: _passwordController,
                   hint: 'Password',
-                  obscure: true,
                 ),
                 const SizedBox(height: 12),
                 Padding(

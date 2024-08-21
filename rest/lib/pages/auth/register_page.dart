@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rest/widgets/dialog_helper.dart';
 import 'dart:convert';
 
+import '../../widgets/text_fields/password_fields.dart';
 import '../../widgets/text_fields/text_fields.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -64,9 +66,9 @@ class _RegisterPageState extends State<RegisterPage> {
             widget.showLoginPage();
           } else if (response.statusCode == 400) {
             // Registration successful, navigate to login page
-            _showErrorDialog(response.body);
+            DialogHelper.showErrorDialog(context,response.body);
           } else {
-            _showErrorDialog('Registration failed. Please try again.');
+            DialogHelper.showErrorDialog(context,'Registration failed. Please try again.');
           }
         }
       } catch (e) {
@@ -74,34 +76,19 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {
             _isLoading = false;
           });
-          _showErrorDialog('An error occurred. Please try again.');
+          DialogHelper.showErrorDialog(context,'An error occurred. Please try again.');
         }
       }
     } else {
       setState(() {
         _isLoading = false;
       });
-      _showErrorDialog('password and confirm password are not match');
+      DialogHelper.showErrorDialog(context, 'password and confirm password are not match');
+      
     }
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: const Text('Okay'),
-          ),
-        ],
-      ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -124,25 +111,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFields(
                   controller: _nameController,
                   hint: 'Name',
-                  obscure: false,
+
                 ),
                 const SizedBox(height: 10),
                 TextFields(
                   controller: _usernameController,
                   hint: 'Username',
-                  obscure: false,
+
                 ),
                 const SizedBox(height: 10),
-                TextFields(
+                PasswordFields(
                   controller: _passwordController,
                   hint: 'Password',
-                  obscure: true,
+
                 ),
                 const SizedBox(height: 10),
-                TextFields(
+                PasswordFields(
                   controller: _passwordConfirmController,
                   hint: 'Confirm password',
-                  obscure: true,
+
                 ),
                 const SizedBox(height: 12),
                 Padding(

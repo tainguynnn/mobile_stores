@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:rest/widgets/dialog_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -12,7 +13,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
   void addToCart(Product product) {
     final cartItems = List<Map<String, dynamic>>.from(state);
 
-    final index = cartItems.indexWhere((item) => item['name'] == product.name);
+    final index = cartItems.indexWhere((item) => item['id'] == product.id);
 
     if (index >= 0) {
       cartItems[index]['Qty'] =
@@ -59,21 +60,8 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
   Future<void> createOrder(BuildContext context) async {
     final cartItems = state;
     if (cartItems.isEmpty) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('no product in cart'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-              child: const Text('Okay'),
-            ),
-          ],
-        ),
-      );
+      DialogHelper.showErrorDialog(context, 'no product in cart');
+
     } else {
       final total = cartItems.fold<int>(
           0,
@@ -110,21 +98,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
       if (response.statusCode == 201) {
         clearCart();
       } else {
-        showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Error'),
-            content: const Text('not enough units in stock'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-                child: const Text('Okay'),
-              ),
-            ],
-          ),
-        );
+        DialogHelper.showErrorDialog(context,'not enough unit in stock');
       }
     }
   }
