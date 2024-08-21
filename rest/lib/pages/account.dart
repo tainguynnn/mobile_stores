@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rest/widgets/screen_title/page_title.dart';
 import 'package:rest/models/user.dart';
 
-
 import '../constant/constant.dart';
 import '../widgets/product_detail/account_attribute.dart';
 
@@ -43,7 +42,7 @@ class _AccountState extends State<Account> {
     // Navigate to the login screen and remove all previous routes
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const AuthPage()),
-          (route) => false,
+      (route) => false,
     );
   }
 
@@ -74,12 +73,14 @@ class _AccountState extends State<Account> {
                   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                   // Set the background color
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // Set the border radius
+                    borderRadius:
+                        BorderRadius.circular(8), // Set the border radius
                   ),
                   // Set the button to be square (60x60)
                   padding: const EdgeInsets.symmetric(
                       horizontal: 32,
-                      vertical: 10), // Remove padding to make it a perfect square
+                      vertical:
+                          10), // Remove padding to make it a perfect square
                 ),
                 onPressed: _logOut,
                 child: const Text('Log out'),

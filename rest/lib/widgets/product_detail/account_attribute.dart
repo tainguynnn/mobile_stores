@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AccountAttribute extends StatelessWidget {
-   AccountAttribute({super.key,required this.detail, required this.title});
+  AccountAttribute({super.key, required this.detail, required this.title});
 
   String title;
   String detail;

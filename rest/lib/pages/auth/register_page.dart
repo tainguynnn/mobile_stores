@@ -67,9 +67,10 @@ class _RegisterPageState extends State<RegisterPage> {
             widget.showLoginPage();
           } else if (response.statusCode == 400) {
             // Registration successful, navigate to login page
-            DialogHelper.showErrorDialog(context,response.body);
+            DialogHelper.showErrorDialog(context, response.body);
           } else {
-            DialogHelper.showErrorDialog(context,'Registration failed. Please try again.');
+            DialogHelper.showErrorDialog(
+                context, 'Registration failed. Please try again.');
           }
         }
       } catch (e) {
@@ -77,19 +78,18 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {
             _isLoading = false;
           });
-          DialogHelper.showErrorDialog(context,'An error occurred. Please try again.');
+          DialogHelper.showErrorDialog(
+              context, 'An error occurred. Please try again.');
         }
       }
     } else {
       setState(() {
         _isLoading = false;
       });
-      DialogHelper.showErrorDialog(context, 'password and confirm password are not match');
-      
+      DialogHelper.showErrorDialog(
+          context, 'password and confirm password are not match');
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,25 +112,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFields(
                   controller: _nameController,
                   hint: 'Name',
-
                 ),
                 const SizedBox(height: 10),
                 TextFields(
                   controller: _usernameController,
                   hint: 'Username',
-
                 ),
                 const SizedBox(height: 10),
                 PasswordFields(
                   controller: _passwordController,
                   hint: 'Password',
-
                 ),
                 const SizedBox(height: 10),
                 PasswordFields(
                   controller: _passwordConfirmController,
                   hint: 'Confirm password',
-
                 ),
                 const SizedBox(height: 12),
                 Padding(

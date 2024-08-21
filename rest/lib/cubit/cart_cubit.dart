@@ -11,8 +11,11 @@ import '../models/product.dart';
 class CartCubit extends Cubit<List<Map<String, dynamic>>> {
   CartCubit() : super([]);
 
+  List<Map<String, dynamic>> getCart() =>
+      List<Map<String, dynamic>>.from(state);
+
   void addToCart(Product product) {
-    final cartItems = List<Map<String, dynamic>>.from(state);
+    final cartItems = getCart();
 
     final index = cartItems.indexWhere((item) => item['id'] == product.id);
 
@@ -36,7 +39,7 @@ class CartCubit extends Cubit<List<Map<String, dynamic>>> {
   }
 
   void deleteFromCart(Map<String, dynamic> cartItem) {
-    final cartItems = List<Map<String, dynamic>>.from(state);
+    final cartItems = getCart();
 
     final index =
         cartItems.indexWhere((item) => item['name'] == cartItem['name']);
